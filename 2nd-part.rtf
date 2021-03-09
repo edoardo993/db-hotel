@@ -178,24 +178,30 @@
 \uc0\u9679 \'a0\'a0\'a0\'a0Come si chiamano gli ospiti che hanno fatto pi\'f9 di due prenotazioni?\
 \
 \
-		\
+		SELECT COUNT(prenotazione_id) AS reservations_num, ospiti.name, ospiti.lastname\
+		FROM prenotazioni_has_ospiti\
+		JOIN prenotazioni\
+		ON prenotazioni_has_ospiti.prenotazione_id = prenotazioni.id\
+		JOIN ospiti\
+		ON prenotazioni_has_ospiti.ospite_id = ospiti.id\
+		GROUP BY ospite_id\
+		HAVING \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 reservations_num\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4  > 2\
 \
 \
 \
 \uc0\u9679 \'a0\'a0\'a0\'a0Stampare tutti gli ospiti per ogni prenotazione\
 \
 \
-\
+		SELECT ospiti.name, ospiti.lastname, prenotazioni_has_ospiti.prenotazione_id\
+		FROM ospiti\
+		JOIN prenotazioni_has_ospiti\
+		ON ospiti.id = prenotazioni_has_ospiti.ospite_id\
 \
 \
 \
 \uc0\u9679 \'a0\'a0\'a0\'a0Stampare Nome, Cognome, Prezzo e Pagante per tutte le prenotazioni fatte a Maggio 2018\
-\
-\
-\
-\
-\
-\
 \uc0\u9679 \'a0\'a0\'a0\'a0Fai la somma di tutti i prezzi delle prenotazioni per le stanze del primo piano\
 \
 \
