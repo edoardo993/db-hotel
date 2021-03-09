@@ -1,0 +1,262 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2578
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue0;\red199\green200\blue201;
+\red199\green200\blue201;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\csgray\c0\c0;\cssrgb\c81961\c82353\c82745;
+\cssrgb\c81961\c82353\c82745;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww28300\viewh16080\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs30 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 \uc0\u9679 \'a0\'a0\'a0\'a0Seleziona tutti gli ospiti che sono stati identificati con la carta di identit\'e0\
+\
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 		SELECT *\
+		FROM ospiti\
+		WHERE `document_type` = 'CI\'92;\
+\
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \uc0\u9679 \'a0\'a0\'a0\'a0Seleziona tutti gli ospiti che sono nati dopo il 1988\
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 		SELECT *\
+		FROM ospiti\
+		WHERE `date_of_birth` >= \'921989-01-01\'92;\
+\
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \uc0\u9679 \'a0\'a0\'a0\'a0Seleziona tutti gli ospiti che hanno pi\'f9 di 20 anni (al momento dell\'92esecuzione della query)\
+\
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 		SELECT `name`,`lastname`,`date_of_birth`,TIMESTAMPDIFF(YEAR,`date_of_birth`, CURRENT_TIMESTAMP ) AS age\
+		FROM `ospiti`\
+		WHERE TIMESTAMPDIFF(YEAR,`date_of_birth`, CURRENT_TIMESTAMP ) > 20;\
+\
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \uc0\u9679 \'a0\'a0\'a0\'a0Seleziona tutti gli ospiti il cui nome inizia con la D\
+\
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 		SELECT *\
+		FROM `ospiti`\
+		WHERE `name` LIKE \'91D%\'92 ;\
+\
+\
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \uc0\u9679 \'a0\'a0\'a0\'a0Calcola il totale degli ordini accepted\
+\
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 		SELECT SUM(price)\
+		AS TotalAcceptedOrders\
+		FROM pagamenti\
+		WHERE status = \'91accepted\'92\
+\
+\
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \uc0\u9679 \'a0\'a0\'a0\'a0Qual \'e8 il prezzo massimo pagato?\
+\
+\
+		SELECT MAX(price)\
+		AS higher_price\
+		FROM pagamenti\
+\
+\
+\uc0\u9679 \'a0\'a0\'a0\'a0Seleziona gli ospiti riconosciuti con patente e nati nel 1975\
+\
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 		SELECT *\
+		FROM ospiti\
+		WHERE `document_type` = \'91Driver License\'92\
+			AND \'91date_of_birth\'92 LIKE \'921975%\'92\
+\
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \uc0\u9679 \'a0\'a0\'a0\'a0Quanti paganti sono anche ospiti?\
+\
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 		SELECT *\
+		FROM paganti\
+		WHERE ospite_id IS NOT NULL;\
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+\uc0\u9679 \'a0\'a0\'a0\'a0Quanti posti letto ha l\'92hotel in totale?\
+\pard\pardeftab720\partightenfactor0
+\cf2 		\
+\
+		SELECT SUM(beds)\
+		FROM stanze\
+\
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs44 \cf2 Group by\
+
+\fs30 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\b0 \cf2 \
+\uc0\u9679 \'a0\'a0\'a0\'a0Conta gli ospiti raggruppandoli per anno di nascita\
+\
+\
+		SELECT date_of_birth, COUNT(id)\
+		AS birth_year\
+		FROM ospiti\
+		GROUP BY date_of_birth\
+\
+\
+\uc0\u9679 \'a0\'a0\'a0\'a0Somma i prezzi dei pagamenti raggruppandoli per status\
+\
+\
+		SELECT SUM(price), status\
+		FROM pagamenti\
+		GROUP BY status\
+\
+\
+\uc0\u9679 \'a0\'a0\'a0\'a0Conta quante volte \'e8 stata prenotata ogni stanza\
+\
+\
+		SELECT COUNT(id)\
+		FROM prenotazioni\
+		GROUP BY stanza_id\
+\
+\
+\uc0\u9679 \'a0\'a0\'a0\'a0Fai una analisi per vedere se ci sono ore in cui le prenotazioni sono pi\'f9 frequenti\
+\
+\
+		SELECT COUNT(id) AS \'91num_of_reservations\'92, HOUR(created_at) AS \'91hour_reservations\'92\
+		FROM prenotazioni\
+		GROUP BY HOUR (created_at)\
+\
+\
+\
+\uc0\u9679 \'a0\'a0\'a0\'a0Quante prenotazioni ha fatto l\'92ospite che ha fatto pi\'f9 prenotazioni?\
+\
+\
+		SELECT COUNT(ospite_id) AS \'91num_reservations\'92, ospite_id\
+		FROM prenotazioni_has_ospiti\
+		GROUP BY ospite_id\
+		ORDER BY SUM(prenotazione_id) DESC\
+		LIMIT 1\
+\
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs44 \cf2 Join\
+
+\fs30 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\b0 \cf2 \
+\uc0\u9679 \'a0\'a0\'a0\'a0Come si chiamano gli ospiti che hanno fatto pi\'f9 di due prenotazioni?\
+\
+\
+		\
+\
+\
+\
+\uc0\u9679 \'a0\'a0\'a0\'a0Stampare tutti gli ospiti per ogni prenotazione\
+\
+\
+\
+\
+\
+\
+\uc0\u9679 \'a0\'a0\'a0\'a0Stampare Nome, Cognome, Prezzo e Pagante per tutte le prenotazioni fatte a Maggio 2018\
+\
+\
+\
+\
+\
+\
+\uc0\u9679 \'a0\'a0\'a0\'a0Fai la somma di tutti i prezzi delle prenotazioni per le stanze del primo piano\
+\
+\
+		SELECT SUM(price), floor\
+		FROM stanze\
+		JOIN prenotazioni\
+		ON prenotazioni.stanza_id = stanze.id\
+		JOIN pagamenti\
+		ON pagamenti.prenotazione_id = prenotazioni.id\
+		WHERE floor = 1\
+\
+\
+\
+\uc0\u9679 \'a0\'a0\'a0\'a0Prendi i dati di fatturazione per la prenotazione con id=7\
+\
+\
+\
+\
+\
+\
+\uc0\u9679 \'a0\'a0\'a0\'a0Le stanze sono state tutte prenotate almeno una volta? (Visualizzare le stanze non ancora prenotate)\
+\
+\
+		SELECT *\
+		FROM stanze\
+		LEFT JOIN prenotazioni\
+		ON prenotazioni.stanza_id = stanze.id\
+		WHERE prenotazioni.id IS NULL\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+}
