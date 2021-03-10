@@ -202,6 +202,20 @@
 \
 \
 \uc0\u9679 \'a0\'a0\'a0\'a0Stampare Nome, Cognome, Prezzo e Pagante per tutte le prenotazioni fatte a Maggio 2018\
+\
+\
+		SELECT ospiti.name, ospiti.lastname, pagamenti.price\
+		FROM paganti\
+		JOIN pagamenti\
+		ON paganti.id = pagamenti.pagante_id\
+		JOIN ospiti\
+		ON ospiti.id = paganti.ospite_id\
+		JOIN prenotazioni\
+		ON pagamenti.prenotazione_id = prenotazioni.id\
+		WHERE prenotazioni.created_at BETWEEN \'932018-05-01\'94 AND \'932018-05-31\'94;\
+\
+\
+\
 \uc0\u9679 \'a0\'a0\'a0\'a0Fai la somma di tutti i prezzi delle prenotazioni per le stanze del primo piano\
 \
 \
@@ -218,7 +232,13 @@
 \uc0\u9679 \'a0\'a0\'a0\'a0Prendi i dati di fatturazione per la prenotazione con id=7\
 \
 \
-\
+		SELECT paganti.name, paganti.lastname, paganti.address, pagamenti.price\
+		FROM prenotazioni\
+		JOIN pagamenti\
+		ON prenotazioni.id = pagamenti.prenotazione_id\
+		JOIN paganti\
+		ON pagamenti.pagante_id = paganti.id\
+		WHERE prenotazioni.id = \'917\'92\
 \
 \
 \
